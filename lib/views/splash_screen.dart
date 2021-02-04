@@ -1,27 +1,14 @@
-import 'dart:async';
-
+import 'package:getx_demo/controllers/splash_controller.dart';
 import 'package:getx_demo/packages/config_package.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    Timer(Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, AppRouter.home);
-    });
-    super.initState();
-  }
+class SplashScreen extends StatelessWidget {
+  //this will call Splash Controller
+  var splashController = Get.put(SplashController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
       body: Container(
         width: MediaQuery.of(context).size.width,
         child: Column(

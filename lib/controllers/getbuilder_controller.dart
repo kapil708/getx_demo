@@ -2,8 +2,17 @@
 import 'package:get/get.dart';
 import 'package:getx_demo/models/local_data.dart';
 
-class Page1Controller extends GetxController {
-  var list = List().obs;
+class GetBuilderController extends GetxController {
+  int count = 0;
+
+  int get counterValue => count;
+
+  void increment() {
+    count++;
+    update();
+  }
+
+  /*var list = List().obs;
   var data = Get.arguments;
 
   @override
@@ -20,5 +29,5 @@ class Page1Controller extends GetxController {
 
   void addMore() {
     list.add({'id': '11', 'name': 'Nameeeeee'});
-  }
+  }*/
 }
