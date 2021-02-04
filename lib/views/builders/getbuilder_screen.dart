@@ -4,7 +4,7 @@ import 'package:getx_demo/controllers/getbuilder_controller.dart';
 import 'package:getx_demo/packages/config_package.dart';
 
 class GetBuilderScreen extends StatelessWidget {
-  var getBuilderController = Get.put(GetBuilderController());
+  var getBuilderController = Get.find<GetBuilderController>();
 
   @override
   Widget build(BuildContext context) {
