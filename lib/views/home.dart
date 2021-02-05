@@ -1,7 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:getx_demo/packages/config_package.dart';
+import 'package:getx_demo/theme/theme_service.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> with TickerProviderStateMixin {
+  AnimationController _animationController;
+  bool isPlaying = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 450));
+    super.initState();
+  }
+
+  void _handleOnPressed() {
+    setState(() {
+      isPlaying = !isPlaying;
+      isPlaying ? _animationController.forward() : _animationController.reverse();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +44,7 @@ class Home extends StatelessWidget {
                     },
                     child: Card(
                       elevation: 5,
+                      color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.all(screenWidth(15)),
                         child: Column(
@@ -40,6 +64,7 @@ class Home extends StatelessWidget {
                     },
                     child: Card(
                       elevation: 5,
+                      color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.all(screenWidth(15)),
                         child: Column(
@@ -59,6 +84,7 @@ class Home extends StatelessWidget {
                     },
                     child: Card(
                       elevation: 5,
+                      color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.all(screenWidth(15)),
                         child: Column(
@@ -78,6 +104,7 @@ class Home extends StatelessWidget {
                     },
                     child: Card(
                       elevation: 5,
+                      color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.all(screenWidth(15)),
                         child: Column(
@@ -90,6 +117,55 @@ class Home extends StatelessWidget {
                         ),
                       ),
                     ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRouter.bottomNavigationScreen);
+                    },
+                    child: Card(
+                      elevation: 5,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: EdgeInsets.all(screenWidth(15)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Bottom Navigation", style: h2),
+                            SizedBox(height: screenWidth(5)),
+                            Text("Bottom Navigations & Animation", style: bodyStyle3),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      ThemeService().changeThemeMode();
+                    },
+                    child: Card(
+                      elevation: 5,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: EdgeInsets.all(screenWidth(15)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Change Theme Dark", style: h2),
+                            SizedBox(height: screenWidth(5)),
+                            Text("change app theme dark & light", style: bodyStyle3),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: AnimatedIcon(
+                      icon: AnimatedIcons.play_pause,
+                      progress: _animationController,
+                    ),
+                    iconSize: 150,
+                    splashColor: Colors.greenAccent,
+                    onPressed: () => _handleOnPressed(),
                   ),
                 ],
               ),

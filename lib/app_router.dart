@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:getx_demo/controllers/bindings/getbuilder_bind.dart';
-import 'package:getx_demo/controllers/bindings/obxget_bind.dart';
 import 'package:getx_demo/packages/screen_package.dart'; //all views list
 
 class AppRouter {
@@ -12,6 +11,7 @@ class AppRouter {
   static const getBuilderScreen = '/getBuilderScreen';
   static const obxGtxScreen = '/obxGtxScreen';
   static const language = '/language';
+  static const bottomNavigationScreen = '/bottomNavigationScreen';
 
   static List<GetPage> getPages = [
     GetPage(name: home, page: () => Home()),
@@ -22,5 +22,6 @@ class AppRouter {
     GetPage(name: getBuilderScreen, page: () => GetBuilderScreen(), binding: GetBuildBind()),
     GetPage(name: obxGtxScreen, page: () => ObxGtxScreen()),
     GetPage(name: language, page: () => Language()),
+    GetPage(name: bottomNavigationScreen, page: () => BottomNavigationScreen()),
   ];
 }

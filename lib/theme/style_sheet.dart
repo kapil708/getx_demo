@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:getx_demo/utility/screen_util.dart';
 import 'package:getx_demo/theme/style_color.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ TextStyle textExtraBold(double size) {
   return TextStyle(
     fontSize: fontSize(size),
     fontWeight: extraBold,
-    color: textPrimaryColor,
+    //color: textPrimaryColor,
   );
 }
 
@@ -58,14 +59,14 @@ TextStyle textSemiBold(double size) {
   return TextStyle(
     fontSize: fontSize(size),
     fontWeight: semiBold,
-    color: textPrimaryColor,
+    //color: textPrimaryColor,
   );
 }
 
 TextStyle textRegular(double size) {
   return TextStyle(
     fontSize: fontSize(size),
-    color: textPrimaryColor,
+    //color: textPrimaryColor,
   );
 }
 

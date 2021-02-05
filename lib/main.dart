@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil_init.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:getx_demo/app_init.dart';
 import 'package:getx_demo/controllers/splash_controller.dart';
 import 'package:getx_demo/packages/config_package.dart';
+import 'package:getx_demo/theme/theme_service.dart';
 import 'package:getx_demo/utility/language_list.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   Get.put(SplashController());
   Get.put(SplashController());
   runApp(MyApp());
@@ -24,7 +27,9 @@ class MyApp extends StatelessWidget {
         title: "My App",
         home: AppInit(),
         getPages: AppRouter.getPages,
-        theme: appTheme,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeService().getThemeMode(),
       ),
     );
   }
