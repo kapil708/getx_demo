@@ -19,7 +19,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(360, 690),
+      allowFontScaling: false,
       child: GetMaterialApp(
+        builder: (context, widget) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: widget,
+          );
+        },
         debugShowCheckedModeBanner: false,
         translations: Language(),
         locale: Locale('en', 'US'),

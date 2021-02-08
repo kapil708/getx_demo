@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:getx_demo/packages/config_package.dart';
+import 'package:getx_demo/theme/theme_service.dart';
+import 'package:lottie/lottie.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
   BottomNavigationScreen({Key key}) : super(key: key);
@@ -9,8 +12,10 @@ class BottomNavigationScreen extends StatefulWidget {
 
 /// This is the private State class that goes with BottomNavigationScreen.
 class _BottomNavigationScreenState extends State<BottomNavigationScreen> with TickerProviderStateMixin {
-  AnimationController _animationController;
-  bool isPlaying = false;
+  AnimationController _homeAnimationController;
+  AnimationController _jobAnimationController;
+  AnimationController _offerAnimationController;
+  AnimationController _profileAnimationController;
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -18,28 +23,25 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> with Ti
   @override
   void initState() {
     // TODO: implement initState
-    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 450));
+    _homeAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 450));
+    _jobAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 450));
+    _offerAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 450));
+    _profileAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 450));
     super.initState();
   }
 
-  void _handleOnPressed() {
-    setState(() {
-      isPlaying = !isPlaying;
-      isPlaying ? _animationController.forward() : _animationController.reverse();
-    });
-  }
-
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
+    Lottie.network('https://assets2.lottiefiles.com/packages/lf20_YK5Olq.json', height: 200, width: 200),
     Text(
-      'Index 0: Home',
+      'Index 1: Job',
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
+      'Index 2: Offer',
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
+      'Index 2: Profile',
       style: optionStyle,
     ),
   ];
@@ -47,6 +49,19 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> with Ti
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+
+      _homeAnimationController.reverse();
+      _jobAnimationController.reverse();
+      _offerAnimationController.reverse();
+      _profileAnimationController.reverse();
+
+      if (index == 0)
+        _homeAnimationController.forward();
+      else if (index == 1)
+        _jobAnimationController.forward();
+      else if (index == 2)
+        _offerAnimationController.forward();
+      else if (index == 3) _profileAnimationController.forward();
     });
   }
 
@@ -60,18 +75,41 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> with Ti
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        selectedLabelStyle: TextStyle(fontSize: 0),
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Lottie.network(
+              'https://assets2.lottiefiles.com/packages/lf20_BWLq4L.json',
+              controller: _homeAnimationController,
+              height: 60,
+              width: 60,
+            ),
+            label: '.',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Lottie.network(
+              'https://assets6.lottiefiles.com/packages/lf20_nIuZ4T.json',
+              controller: _jobAnimationController,
+              height: 60,
+              width: 60,
+            ),
+            label: '.',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: AnimatedIcon(
+              icon: AnimatedIcons.list_view,
+              progress: _offerAnimationController,
+              color: Colors.black,
+            ),
+            label: '.',
+          ),
+          BottomNavigationBarItem(
+            icon: AnimatedIcon(
+              icon: AnimatedIcons.menu_close,
+              progress: _profileAnimationController,
+              color: Colors.black,
+            ),
+            label: '.',
           ),
         ],
         currentIndex: _selectedIndex,

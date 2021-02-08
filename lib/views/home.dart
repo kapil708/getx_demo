@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getx_demo/packages/config_package.dart';
 import 'package:getx_demo/theme/theme_service.dart';
+import 'package:lottie/lottie.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,6 +17,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     // TODO: implement initState
     _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 450));
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   void _handleOnPressed() {
@@ -44,13 +51,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     },
                     child: Card(
                       elevation: 5,
-                      color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.all(screenWidth(15)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Styling", style: h2),
+                            Text("Styling", style: ThemeService().isDark ? h2.copyWith(color: Colors.red) : h2.copyWith(color: Colors.yellow)),
                             SizedBox(height: screenWidth(5)),
                             Text("theme & style", style: bodyStyle3),
                           ],
@@ -64,7 +70,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     },
                     child: Card(
                       elevation: 5,
-                      color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.all(screenWidth(15)),
                         child: Column(
@@ -84,7 +89,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     },
                     child: Card(
                       elevation: 5,
-                      color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.all(screenWidth(15)),
                         child: Column(
@@ -104,7 +108,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     },
                     child: Card(
                       elevation: 5,
-                      color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.all(screenWidth(15)),
                         child: Column(
@@ -124,7 +127,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     },
                     child: Card(
                       elevation: 5,
-                      color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.all(screenWidth(15)),
                         child: Column(
@@ -144,7 +146,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     },
                     child: Card(
                       elevation: 5,
-                      color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.all(screenWidth(15)),
                         child: Column(

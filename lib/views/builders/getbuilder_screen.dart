@@ -28,7 +28,7 @@ class GetBuilderScreen extends StatelessWidget {
                 onPressed: () => getBuilderController.increment(),
               ),
               /*Row(
-                children: [
+                children: [˚
                   RaisedButton(
                     child: Text("Add More"),
                     onPressed: () => page1Controller.addMore(),

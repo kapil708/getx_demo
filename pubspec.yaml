@@ -33,6 +33,7 @@ dependencies:
   flash: ^1.3.2
   flutter_native_splash: ^0.2.9
   get_storage: ^1.4.0
+  lottie: ^0.7.0+1
 
 # for splash screen for android and ios
 flutter_native_splash:
@@ -58,6 +59,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/lottie_icons/
 
   fonts:
     - family: CeraPro

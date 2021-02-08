@@ -12,12 +12,15 @@ class AppTheme {
     canvasColor: bgColor,
     appBarTheme: AppBarTheme(color: primaryColor, iconTheme: IconThemeData(color: Colors.white)),
     iconTheme: IconThemeData(color: primaryColor.withOpacity(0.4)),
+    cardColor: Colors.white,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.red,
+    ),
     textTheme: TextTheme(
-      bodyText1: TextStyle(
-        color: textPrimaryColor,
-      ),
+      bodyText1: TextStyle(color: textPrimaryColor),
       bodyText2: TextStyle(color: textPrimaryColor),
       headline4: TextStyle(color: textPrimaryColor),
+      headline1: TextStyle(color: textPrimaryColor),
     ),
     //unselectedWidgetColor: Colors.blue[400],
     /*buttonTheme: ButtonThemeData(
@@ -32,12 +35,21 @@ class AppTheme {
     toggleableActiveColor: Colors.grey[300],
     appBarTheme: AppBarTheme(color: Colors.grey[900], iconTheme: IconThemeData(color: Colors.grey[100])),
     iconTheme: IconThemeData(color: Colors.grey[300]),
+    cardColor: Colors.black,
     textTheme: TextTheme(
-      bodyText1: TextStyle(
-        color: Colors.white,
-      ),
-      bodyText2: TextStyle(color: Colors.white),
+      //header
+      headline1: TextStyle(color: Colors.white),
+      headline2: TextStyle(color: Colors.white),
+      headline3: TextStyle(color: Colors.white),
       headline4: TextStyle(color: Colors.white),
+      headline5: TextStyle(color: Colors.white),
+      headline6: TextStyle(color: Colors.white),
+      //subtitle
+      subtitle1: TextStyle(color: Colors.white),
+      subtitle2: TextStyle(color: Colors.white),
+      //body
+      bodyText1: TextStyle(color: Colors.white),
+      bodyText2: TextStyle(color: Colors.white),
     ),
     /*unselectedWidgetColor: Colors.grey[300],
     dividerColor: Colors.grey[500],

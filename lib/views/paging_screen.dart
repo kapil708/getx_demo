@@ -15,8 +15,8 @@ class PagingScreen extends StatelessWidget {
           child: Column(
             children: [
               ListTile(
-                title: Text("Get.to"),
-                subtitle: Text("Navigation by class"),
+                title: Text("Get.to", style: h1),
+                subtitle: Text("Navigation by class", style: bodyStyle5),
                 onTap: () => Get.to(Page1()),
               ),
               ListTile(
