@@ -6,6 +6,7 @@ import 'package:getx_demo/controllers/splash_controller.dart';
 import 'package:getx_demo/packages/config_package.dart';
 import 'package:getx_demo/theme/theme_service.dart';
 import 'package:getx_demo/utility/language_list.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() async {
   await GetStorage.init();
