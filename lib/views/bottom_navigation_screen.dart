@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getx_demo/packages/config_package.dart';
-import 'package:getx_demo/theme/theme_service.dart';
 import 'package:lottie/lottie.dart';
 
 class BottomNavigationScreen extends StatefulWidget {

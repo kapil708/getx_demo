@@ -14,7 +14,7 @@ class AppRouter {
   static const bottomNavigationScreen = '/bottomNavigationScreen';
 
   static List<GetPage> getPages = [
-    GetPage(name: home, page: () => Home()),
+    GetPage(name: home, page: () => HomeScreen()),
     GetPage(name: stylingScreen, page: () => StylingScreen()),
     GetPage(name: pagingScreen, page: () => PagingScreen()),
     GetPage(name: controllerScreen, page: () => ControllerScreen()),

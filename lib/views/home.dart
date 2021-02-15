@@ -1,179 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:getx_demo/packages/config_package.dart';
-import 'package:getx_demo/theme/theme_service.dart';
-import 'package:lottie/lottie.dart';
+import 'package:getx_demo/app_router.dart';
+import 'package:getx_demo/views/index.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:get/get.dart';
 
-class Home extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeState extends State<Home> with TickerProviderStateMixin {
-  AnimationController _animationController;
-  bool isPlaying = false;
-
+class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    // TODO: implement initState
-    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 450));
+    initOneSignalNotification();
     super.initState();
   }
 
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initOneSignalNotification() async {
+    //Remove this method to stop OneSignal Debugging
+    OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
 
-  void _handleOnPressed() {
-    setState(() {
-      isPlaying = !isPlaying;
-      isPlaying ? _animationController.forward() : _animationController.reverse();
+    OneSignal.shared.setNotificationReceivedHandler((OSNotification notification) {
+      // will be called whenever a notification is received
+      print("Received notification");
+      //print(notification.jsonRepresentation().replaceAll("\\n", "\n"));
+      print(notification.payload.additionalData);
+    });
+
+    OneSignal.shared.setNotificationOpenedHandler((OSNotificationOpenedResult result) async {
+      // will be called whenever a notification is opened/button pressed.
+      Get.snackbar("One Signal", "Open Handler", snackPosition: SnackPosition.BOTTOM);
+      print("Opened notification");
+      print(result.notification.jsonRepresentation().replaceAll("\\n", "\n"));
+      print(result.notification.payload.additionalData);
+      dynamic data = result.notification.payload.additionalData;
+      if (data != null) {
+        if (data["type"] == "notification") {
+          Get.toNamed(AppRouter.language);
+        }
+      }
+    });
+
+    OneSignal.shared.setPermissionObserver((OSPermissionStateChanges changes) {
+      // will be called whenever the permission changes
+      // (ie. user taps Allow on the permission prompt in iOS)
+      print("PERMISSION STATE CHANGED");
+    });
+
+    OneSignal.shared.setSubscriptionObserver((OSSubscriptionStateChanges changes) {
+      // will be called whenever the subscription changes
+      //(ie. user gets registered with OneSignal and gets a user ID)
+    });
+
+    OneSignal.shared.setEmailSubscriptionObserver((OSEmailSubscriptionStateChanges emailChanges) {
+      // will be called whenever then user's email subscription changes
+      // (ie. OneSignal.setEmail(email) is called and the user gets registered
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Home"),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(screenWidth(20)),
-          child: Column(
-            children: [
-              Wrap(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRouter.stylingScreen);
-                    },
-                    child: Card(
-                      elevation: 5,
-                      child: Padding(
-                        padding: EdgeInsets.all(screenWidth(15)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Styling", style: ThemeService().isDark ? h2.copyWith(color: Colors.red) : h2.copyWith(color: Colors.yellow)),
-                            SizedBox(height: screenWidth(5)),
-                            Text("theme & style", style: bodyStyle3),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRouter.pagingScreen);
-                    },
-                    child: Card(
-                      elevation: 5,
-                      child: Padding(
-                        padding: EdgeInsets.all(screenWidth(15)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Getx Navigation", style: h2),
-                            SizedBox(height: screenWidth(5)),
-                            Text("navigation & data", style: bodyStyle3),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRouter.controllerScreen);
-                    },
-                    child: Card(
-                      elevation: 5,
-                      child: Padding(
-                        padding: EdgeInsets.all(screenWidth(15)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Getx Controllers", style: h2),
-                            SizedBox(height: screenWidth(5)),
-                            Text("all 3 controllers", style: bodyStyle3),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRouter.language);
-                    },
-                    child: Card(
-                      elevation: 5,
-                      child: Padding(
-                        padding: EdgeInsets.all(screenWidth(15)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Language", style: h2),
-                            SizedBox(height: screenWidth(5)),
-                            Text("language selection", style: bodyStyle3),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRouter.bottomNavigationScreen);
-                    },
-                    child: Card(
-                      elevation: 5,
-                      child: Padding(
-                        padding: EdgeInsets.all(screenWidth(15)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Bottom Navigation", style: h2),
-                            SizedBox(height: screenWidth(5)),
-                            Text("Bottom Navigations & Animation", style: bodyStyle3),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      ThemeService().changeThemeMode();
-                    },
-                    child: Card(
-                      elevation: 5,
-                      child: Padding(
-                        padding: EdgeInsets.all(screenWidth(15)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Change Theme Dark", style: h2),
-                            SizedBox(height: screenWidth(5)),
-                            Text("change app theme dark & light", style: bodyStyle3),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    icon: AnimatedIcon(
-                      icon: AnimatedIcons.play_pause,
-                      progress: _animationController,
-                    ),
-                    iconSize: 150,
-                    splashColor: Colors.greenAccent,
-                    onPressed: () => _handleOnPressed(),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return HomeLayout();
   }
 }
