@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:getx_demo/packages/config_package.dart';
@@ -43,14 +44,17 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
 
   void _showQRandPrint() {
     _getWidgetImage().then((img) {
-      final pdf = new PDFDocument();
-      final page = new PDFPage(pdf, pageFormat: PDFPageFormat(75.0, 100.0));
-      final g = page.getGraphics();
-      final font = new PDFFont(pdf);
+      final pdf = pw.Document();
 
-      PDFImage image = new PDFImage(pdf, image: img, width: 75, height: 100);
-      g.drawImage(image, 0.0, 0.0);
+      final image = pw.MemoryImage(img);
 
+      pdf.addPage(
+        pw.Page(
+            pageFormat: PdfPageFormat.a4,
+            build: (pw.Context context) {
+              return pw.Image(image); // Center
+            }),
+      );
       Printing.printPdf(document: pdf);
     });
   }
