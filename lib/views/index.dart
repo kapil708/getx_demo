@@ -42,10 +42,10 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
     });
   }
 
-  void _showQRandPrint() {
+  void _showQRandPrint() async {
     _getWidgetImage().then((img) {
+      print('to pdf');
       final pdf = pw.Document();
-
       final image = pw.MemoryImage(img);
 
       pdf.addPage(
@@ -55,12 +55,14 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
               return pw.Image(image); // Center
             }),
       );
-      Printing.printPdf(document: pdf);
+
+      Printing.layoutPdf(onLayout: (format) => pdf.save());
     });
   }
 
   Future<Uint8List> _getWidgetImage() async {
     try {
+      print('to image');
       RenderRepaintBoundary boundary = _globalKey.currentContext.findRenderObject();
       ui.Image image = await boundary.toImage(pixelRatio: 3.0);
       ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
@@ -211,7 +213,7 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
                         ),
                         InkWell(
                           onTap: () {
-                            //
+                            _showQRandPrint();
                           },
                           child: Card(
                             elevation: 5,
